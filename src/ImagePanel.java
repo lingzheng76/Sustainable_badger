@@ -20,14 +20,14 @@ public class ImagePanel extends JPanel {
 		super();
 		// load the image
 		try {
-			image = ImageIO.read(new File("wallhaven-0qo2r4.jpg"));
+			image = ImageIO.read(new File("images/map.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 
 	public Dimension getSize() {
-		return new Dimension(image.getWidth() / 5, image.getHeight() / 4);
+		return new Dimension(image.getWidth() + 5, image.getHeight() + 35);
 	}
 
 	@Override
@@ -35,6 +35,6 @@ public class ImagePanel extends JPanel {
 		// paint the component
 		super.paintComponent(g);
 		// paint the image 
-		g.drawImage(image, 0, 0, image.getWidth() / 5, image.getHeight() / 5, this);
+		g.drawImage(image, 0, 0, image.getWidth(), image.getHeight(), this);
 	}
 }
