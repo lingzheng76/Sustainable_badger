@@ -19,9 +19,13 @@ public class Lounge extends PApplet {
 	private PImage backgroundImage;// the background image of the room
 	private ArrayList<Furniture> furnitures; // holds all furnitures in the room
 
-	private Furniture light;
+	private PImage on;
+	private PImage off;
+	private boolean lightOff;
 	private Furniture tv;
 	private Furniture fire;
+
+	protected Badger badger;
 
 	/**
 	 * Sets the window
@@ -36,17 +40,22 @@ public class Lounge extends PApplet {
 	 */
 	@Override
 	public void setup() {
-		backgroundImage = loadImage("images/background.jpeg");
-		backgroundImage.resize(800, 600);
+		on = loadImage("images/background.jpeg");
+		on.resize(800, 600);
+		backgroundImage = on;
 		furnitures = new ArrayList<Furniture>();
 		Furniture.setProcessing(this);
+		badger = new Badger(this);
 
-		light = new Furniture("light",0,0,800, 600);
-//		light.resize();
-		tv = new Furniture("tv", 350, 200, 100, 100);
-//		tv.resize(100, 50);
-		fire = new Furniture("fire", 350, 350, 100, 100);
-//		fire.resize(200, 150);
+		off = loadImage("images/light.jpeg");
+		off.resize(800, 600);
+		// light.resize();
+		tv = new Furniture("tv", 325, 220, 140, 80);
+		furnitures.add(tv);
+		// tv.resize(100, 50);
+		fire = new Furniture("fire", 300, 370, 190, 150);
+		furnitures.add(fire);
+		// fire.resize(200, 150);
 	}
 
 	/**
@@ -55,44 +64,49 @@ public class Lounge extends PApplet {
 	@Override
 	public void draw() {
 		image(backgroundImage, 0, 0); // draw the background
-		mousePress();
+		
+		
 		if (!furnitures.isEmpty()) {
 			for (Furniture fur : furnitures) {
 				fur.update();
 			}
 		}
+		mousePress();
+		badger.update();
 	}
 
 	public void mousePress() {
-
-		if (light.isMouseOver() && mousePressed) {
-			if (!light.isOn) {
-				light.isOn = true;
-				furnitures.add(light);
-			} else {
-				light.isOn = false;
-				furnitures.remove(light);
+		if (keyPressed) {
+			if (fire.isOver(badger) && key == ' ') {
+				if (!fire.isOn) {
+					fire.isOn = true;
+					furnitures.add(fire);
+				} else {
+					fire.isOn = false;
+					furnitures.remove(fire);
+				}
 			}
-		}
 
-		if (tv.isMouseOver() && mousePressed) {
-			if (!tv.isOn) {
-				tv.isOn = true;
-				furnitures.add(tv);
-			} else {
-				tv.isOn = false;
-				furnitures.remove(tv);
+			else if (tv.isOver(badger) && key == ' ') {
+				if (!tv.isOn) {
+					tv.isOn = true;
+					furnitures.add(tv);
+				} else {
+					tv.isOn = false;
+					furnitures.remove(tv);
+				}
 			}
-		}
 
-		if (fire.isMouseOver() && mousePressed) {
-			if (!fire.isOn) {
-				fire.isOn = true;
-				furnitures.add(fire);
-			} else {
-				light.isOn = false;
-				furnitures.remove(fire);
+			else if (key == ' ') {
+				if (!lightOff) {
+					lightOff = true;
+					backgroundImage = off;
+				} else {
+					lightOff = false;
+					backgroundImage = on;
+				}
 			}
+				
 		}
 		// /** add a new bed when the key is pressed */
 		// /** initialize counter */
@@ -192,6 +206,16 @@ public class Lounge extends PApplet {
 	// 2);
 	//
 	//
+	// }
+
+	protected Badger getbadger() {
+		return badger;
+	}
+	// private boolean isOver() {
+	// // TODO Auto-generated method stub
+	//
+	// if ()
+	// return false;
 	// }
 
 	/**
