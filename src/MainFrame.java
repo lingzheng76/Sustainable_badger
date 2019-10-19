@@ -1,11 +1,11 @@
-import java.awt.BorderLayout;
+import java.awt.CardLayout;
 import java.awt.Dimension;
 import java.awt.Toolkit;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 import javax.swing.JFrame;
-import javax.swing.JLayeredPane;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 /**
@@ -15,23 +15,22 @@ import javax.swing.JPanel;
  */
 public class MainFrame extends JFrame {
 	private static final long serialVersionUID = 8434228199144892220L;
-	private JLayeredPane layeredPane;
+	private CardLayout layout;
+	private JPanel cards;
 
 	public MainFrame() {
 		super();
-		// initialize the content panel
-		ImagePanel imagePanel = new ImagePanel();
+		// create card layout
+		layout = new CardLayout();
+		cards = new JPanel(layout);
 
-		ButtonPanel buttonPanel = new ButtonPanel();
-		buttonPanel.setBounds(0, 0, imagePanel.getSize().width, imagePanel.getSize().height);
-
-		JPanel jp = new JPanel();
-		layeredPane = new JLayeredPane();
-		layeredPane.setPreferredSize(imagePanel.getSize());
-		layeredPane.add(buttonPanel, BorderLayout.CENTER);
-		layeredPane.add(imagePanel, BorderLayout.CENTER);
-		jp.add(layeredPane);
-		setContentPane(jp);
+		// add cards
+		cards.add(new MapPanel(this), "Map");
+		cards.add(new JLabel("Nat"), "Nat");
+		cards.add(new JLabel("Rheta's"), "Rheta's");
+		cards.add(new JLabel("Picnic point"), "Picnic point");
+		cards.add(new JLabel("Dorm"), "Dorm");
+		setContentPane(cards);
 
 		// locate the window in the middle of the screen
 		pack();
@@ -41,13 +40,22 @@ public class MainFrame extends JFrame {
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setTitle("Which garbage are you???"); // TODO: change
 		setVisible(true);
-		addMouseListener(new MouseAdapter() {
+
+		setFocusable(true);
+		addKeyListener(new KeyAdapter() {
 			@Override
-			public void mouseClicked(MouseEvent e) {
-				super.mouseClicked(e);
-				System.out.println(getMousePosition());
+			public void keyPressed(KeyEvent e) {
+				switch (e.getKeyCode()) {
+				case KeyEvent.VK_Q:
+					enter("Map");
+					break;
+				}
 			}
 		});
+	}
+
+	public void enter(String name) {
+		layout.show(cards, name);
 	}
 
 	private void centerAlign() {
@@ -56,5 +64,9 @@ public class MainFrame extends JFrame {
 		int x = (int) (screenSize.getWidth() - windowSize.getWidth()) / 2;
 		int y = (int) (screenSize.getHeight() - windowSize.getHeight()) / 2;
 		setLocation(x, y);
+	}
+
+	public static void main(String[] args) {
+		new MainFrame();
 	}
 }

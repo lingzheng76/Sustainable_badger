@@ -1,4 +1,6 @@
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 
@@ -7,14 +9,20 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-public class ButtonPanel extends JPanel {
+public class ButtonPanel extends JPanel implements ActionListener {
 	private static final long serialVersionUID = -8726704462364227154L;
 	private static final int BUTTON_WIDTH = 30;
 	private static final int BUTTON_HEIGHT = 30;
+	private MainFrame parent;
 
-	public ButtonPanel() {
+	public ButtonPanel(MainFrame parent) {
 		super();
+		this.parent = parent;
 
+		// remove layout
+		setLayout(null);
+
+		// load icon
 		Image image = null;
 		try {
 			image = ImageIO.read(new File("images/pin.png")).getScaledInstance(BUTTON_WIDTH, BUTTON_HEIGHT,
@@ -24,33 +32,27 @@ public class ButtonPanel extends JPanel {
 			System.exit(-1);
 		}
 		ImageIcon icon = new ImageIcon(image);
-		setLayout(null);
 
-		JButton nat = new JButton(icon);
-		add(nat);
-		nat.setBounds(172, 190, BUTTON_WIDTH, BUTTON_HEIGHT);
-		nat.setToolTipText("Nat");
-
-		JButton rheta = new JButton(icon);
-		add(rheta);
-		rheta.setBounds(200, 300, BUTTON_WIDTH, BUTTON_HEIGHT);
-		rheta.setToolTipText("Rheta's");
-
-		JButton dorm = new JButton(icon);
-		add(dorm);
-		dorm.setBounds(590, 530, BUTTON_WIDTH, BUTTON_HEIGHT);
-		dorm.setToolTipText("Dorm");
-
-		JButton pic = new JButton(icon);
-		add(pic);
-		pic.setBounds(700, 70, BUTTON_WIDTH, BUTTON_HEIGHT);
-		pic.setToolTipText("Picnic point");
+		// create buttons
+		addButton(icon, "Nat", 172, 190);
+		addButton(icon, "Rheta's", 200, 300);
+		addButton(icon, "Dorm", 590, 530);
+		addButton(icon, "Picnic point", 700, 70);
 
 		setOpaque(false);
-		setVisible(true);
 	}
 
-	public void addListeners(JButton... buttons) {
-		
+	private void addButton(ImageIcon icon, String name, int x, int y) {
+		JButton jb = new JButton(icon);
+		jb.setBounds(x, y, BUTTON_WIDTH, BUTTON_HEIGHT);
+		jb.setToolTipText(name);
+		jb.setActionCommand(name);
+		jb.addActionListener(this);
+		add(jb);
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		parent.enter(e.getActionCommand());
 	}
 }
