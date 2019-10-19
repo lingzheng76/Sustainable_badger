@@ -22,19 +22,21 @@ public class ImagePanel extends JPanel {
 		try {
 			image = ImageIO.read(new File("images/map.png"));
 		} catch (IOException e) {
-			e.printStackTrace();
+			System.err.println("Cannot load the map.png");
+			System.exit(-1);
 		}
+		setBounds(0, 0, 1000, 600);
 	}
 
 	public Dimension getSize() {
-		return new Dimension(image.getWidth() + 5, image.getHeight() + 35);
+		return new Dimension(image.getWidth(), image.getHeight());
 	}
 
 	@Override
 	protected void paintComponent(Graphics g) {
 		// paint the component
 		super.paintComponent(g);
-		// paint the image 
+		// paint the image
 		g.drawImage(image, 0, 0, image.getWidth(), image.getHeight(), this);
 	}
 }
