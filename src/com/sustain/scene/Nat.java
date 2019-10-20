@@ -40,6 +40,8 @@ public class Nat extends PApplet {
 		transports.add(new Transport("bus", this));
 		transports.add(new Transport("car", this));
 		transport = transports.get(0);
+		Transport.x = 500;
+		Transport.y = 500;
 		size(800, 600);
 	}
 
@@ -69,8 +71,8 @@ public class Nat extends PApplet {
 	}
 
 	public void checkArrive() {
-		int x = transport.x;
-		int y = transport.y;
+		int x = Transport.x;
+		int y = Transport.y;
 		if (110 < x && x < 130 && 150 < y && y < 160) {
 			text("All Done!\nCongrats!!", 200, 350);
 			arrived = true;
@@ -96,6 +98,15 @@ public class Nat extends PApplet {
 		if (event.getKey() == 'q') {
 			parent.setVisible(true);
 			surface.setVisible(false);
+			stop();
 		}
+	}
+
+	public static String getReuslt() {
+		String str =  String.format(
+				"You produced %.2f gram carbon emission when going to the Nat!\n",
+				emission);
+		emission = 0;
+		return str;
 	}
 }

@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.regex.Pattern;
 
 import com.sustain.item.Action;
 import com.sustain.item.DragAndDroppableThing;
@@ -17,6 +18,7 @@ import processing.event.KeyEvent;
 
 public class PlantTree extends PApplet {
 	private static MainFrame parent;
+	public static int planted;
 	private PImage backgroundImage; // The background image of the game
 	private ArrayList<Thing> allThings; // Create an ArrayList to store all
 										// items that will be
@@ -24,6 +26,14 @@ public class PlantTree extends PApplet {
 
 	public static void init(MainFrame parent) {
 		PlantTree.parent = parent;
+	}
+
+	public static String getResult() {
+		String str = String.format(
+				"You have planted %d trees to protect the nature perserve!\n",
+				planted);
+		planted = 0;
+		return str;
 	}
 
 	/*
@@ -75,6 +85,13 @@ public class PlantTree extends PApplet {
 	public void keyPressed(KeyEvent event) {
 		if (event.getKey() == 'q') {
 			parent.setVisible(true);
+			for (int i = 0; i < allThings.size(); i++) {
+				Thing t = allThings.get(i);
+				if (Pattern.matches("4Tree[1-3]", t.NAME) && t.isActive()) {
+					planted++;
+				}
+			}
+			surface.setVisible(false);
 			stop();
 		}
 	}

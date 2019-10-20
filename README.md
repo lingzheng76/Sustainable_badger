@@ -7,6 +7,6 @@ Play an interactive game and choose between sustainable and less sustainable opt
 ### Picnic Point
 - Please plant more trees to protect the lake nature preserve
 ### Rheta's Market
-- Do the garbage classfication right
+- Do the garbage classification right
 ### Natatorium
 - Try different ways to reach the Nat to do the exercise

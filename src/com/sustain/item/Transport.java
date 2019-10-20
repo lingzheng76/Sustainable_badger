@@ -13,7 +13,7 @@ import processing.core.PImage;
 public class Transport extends VisibleThing {
 	private PApplet processing;
 	private PImage image;
-	public int x = 500, y = 500;
+	public static int x = 500, y = 500;
 	public int totalX, totalY;
 
 	public Transport(String type, PApplet processing) {

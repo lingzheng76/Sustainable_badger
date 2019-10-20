@@ -129,7 +129,9 @@ public class MainFrame extends JFrame {
 
 	public void reset(ActionEvent e) {
 		JOptionPane.showMessageDialog(this,
-				"Congradulations! You have completed you day!");
+				"Congradulations! You have completed you day!\n"
+						+ Nat.getReuslt() + TrashBin.getResult()
+						+ PlantTree.getResult() + Dorm.getResult());
 		time = 0;
 		mapPanel.setEnabled(true);
 		mapPanel.updateTime(0);

@@ -11,7 +11,7 @@ import processing.core.PApplet;
  */
 
 public class Thing {
-	private final String NAME; // the constant name identifying this object
+	public final String NAME; // the constant name identifying this object
 	private boolean isActive; // active means thing is visible and can be
 								// interacted with
 	private static PApplet processing = null;

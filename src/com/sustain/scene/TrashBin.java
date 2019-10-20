@@ -19,10 +19,17 @@ public class TrashBin extends PApplet {
 	private VisibleThing bin2;
 	private VisibleThing bin3;
 	private ArrayList<Thing> allThings; // holds all trash items
-	private int score;
+	public static int score;
 
 	public static void init(MainFrame parent) {
 		TrashBin.parent = parent;
+	}
+
+	public static String getResult() {
+		String str = String
+				.format("You correctly sort %d trashes in Rheta's!\n", score);
+		score = 0;
+		return str;
 	}
 
 	/**
@@ -77,7 +84,6 @@ public class TrashBin extends PApplet {
 		allThings.add(trash1);
 		allThings.add(trash2);
 		textSize(50);
-		score = 0;
 	}
 
 	/**
@@ -108,6 +114,7 @@ public class TrashBin extends PApplet {
 	public void keyPressed(KeyEvent event) {
 		if (event.getKey() == 'q') {
 			parent.setVisible(true);
+			surface.setVisible(false);
 			stop();
 		}
 	}

@@ -28,8 +28,16 @@ public class Dorm extends PApplet {
 	private static PImage off;
 	private Furniture tv;
 	private Furniture fire;
+	private static boolean save;
 
 	protected Badger badger;
+
+	public static String getResult() {
+		String str = String.format("You %s the energy for the dorm!\n",
+				save ? "saved" : "did not save");
+		save = false;
+		return str;
+	}
 
 	/**
 	 * Sets the window
@@ -84,10 +92,8 @@ public class Dorm extends PApplet {
 		image(backgroundImage, 0, 0); // draw the background
 
 		mousePress();
-//		System.out.println(furnitures.size());
 		if (!furnitures.isEmpty()) {
 			for (Furniture fur : furnitures) {
-//				System.out.println(fur.type);
 				fur.update();
 			}
 		}
@@ -127,21 +133,10 @@ public class Dorm extends PApplet {
 	public void keyPressed(KeyEvent event) {
 		if (event.getKey() == 'q') {
 			parent.setVisible(true);
+			save = !furnitures.contains(fire) || !furnitures.contains(tv)
+					|| backgroundImage == off;
+			surface.setVisible(false);
 			stop();
 		}
 	}
-
-//	protected Badger getbadger() {
-//		return badger;
-//	}
-
-//	/**
-//	 * @param args
-//	 */
-//	public static void main(String[] args) {
-//		// TODO Auto-generated method stub
-//		/** start the application */
-//		PApplet.main("Dorm");
-//	}
-
 }
