@@ -9,6 +9,7 @@ public class TrashBin extends PApplet {
 	private VisibleThing bin2;
 	private VisibleThing bin3;
 	private ArrayList<Thing> allThings; // holds all trash items
+	private int score;
 
 	/**
 	 * Sets the window
@@ -41,10 +42,10 @@ public class TrashBin extends PApplet {
 
 		DragAndDroppableThing composed1 = new DragAndDroppableThing("compost" + composed[0], 150, 350, bin1, null);
 		DragAndDroppableThing composed2 = new DragAndDroppableThing("compost" + composed[1], 300, 350, bin1, null);
-		DragAndDroppableThing recylced1 = new DragAndDroppableThing("recyclable" + recycled[0], 450, 350, bin2, null);
-		DragAndDroppableThing recylced2 = new DragAndDroppableThing("recyclable" + recycled[1], 150, 500, bin2, null);
-		DragAndDroppableThing trash1 = new DragAndDroppableThing("food" + wasted[0], 300, 500, bin3, null);
-		DragAndDroppableThing trash2 = new DragAndDroppableThing("food" + wasted[1], 450, 500, bin3, null);
+		DragAndDroppableThing recylced1 = new DragAndDroppableThing("recyclable" + recycled[0], 450, 350, bin3, null);
+		DragAndDroppableThing recylced2 = new DragAndDroppableThing("recyclable" + recycled[1], 150, 500, bin3, null);
+		DragAndDroppableThing trash1 = new DragAndDroppableThing("food" + wasted[0], 300, 500, bin2, null);
+		DragAndDroppableThing trash2 = new DragAndDroppableThing("food" + wasted[1], 450, 500, bin2, null);
 
 		allThings.add(bin1);
 		allThings.add(bin2);
@@ -55,6 +56,8 @@ public class TrashBin extends PApplet {
 		allThings.add(recylced2);
 		allThings.add(trash1);
 		allThings.add(trash2);
+		textSize(50);
+		score = 0;
 	}
 
 	/**
@@ -65,15 +68,21 @@ public class TrashBin extends PApplet {
 		background(201, 233, 246);
 		image(logo, 480, 300);
 		// iterate the allThings list to update each item
+		if (allThings.size() == 3) {
+			text("All Done!\nCongrats!!", 200, 350);
+		}
 		for (int i = 0; i < allThings.size(); i++) {
 			Action actionObj = allThings.get(i).update();
 			// act allThings if the actionObj is not null
 			// remove the items that are not active
+			text(score, 700, 60);
 			if (!allThings.get(i).isActive()) {
 				allThings.remove(i);
 				i--;
+				score++;
 			}
 		}
+		
 
 	}
 
