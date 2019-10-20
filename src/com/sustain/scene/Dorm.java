@@ -1,6 +1,10 @@
 package com.sustain.scene;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+
+import javax.imageio.ImageIO;
 
 import com.sustain.item.Badger;
 import com.sustain.item.Furniture;
@@ -20,8 +24,8 @@ public class Dorm extends PApplet {
 	private PImage backgroundImage;// the background image of the room
 	private ArrayList<Furniture> furnitures; // holds all furniture in the room
 
-	private PImage on;
-	private PImage off;
+	private static PImage on;
+	private static PImage off;
 	private boolean lightOff;
 	private Furniture tv;
 	private Furniture fire;
@@ -36,20 +40,33 @@ public class Dorm extends PApplet {
 		size(800, 600);
 	}
 
+	private static void initImage() {
+		try {
+			on = new PImage(ImageIO.read(new File("images/dorm.jpeg")));
+			off = new PImage(ImageIO.read(new File("images/light.jpeg")));
+		} catch (IOException e) {
+			System.err.println("Cannot load dorm.jpeg or light.jpeg");
+			System.exit(-1);
+		}
+	}
+
+	public static void init(MainFrame parent) {
+		initImage();
+		on.resize(800, 600);
+		off.resize(800, 600);
+		Dorm.parent = parent;
+	}
+
 	/**
 	 * Called once as long as the program starts
 	 */
 	@Override
 	public void setup() {
-		on = loadImage("images/background.jpeg");
-		on.resize(800, 600);
 		backgroundImage = on;
 		furnitures = new ArrayList<Furniture>();
 		Furniture.setProcessing(this);
 		badger = new Badger(this);
 
-		off = loadImage("images/light.jpeg");
-		off.resize(800, 600);
 		// light.resize();
 		tv = new Furniture("tv", 325, 220, 140, 80);
 		furnitures.add(tv);
@@ -85,7 +102,6 @@ public class Dorm extends PApplet {
 //					fire.isOn = true;
 					furnitures.add(fire);
 				} else {
-					System.out.println("fire off");
 //					fire.isOn = false;
 					furnitures.remove(fire);
 				}

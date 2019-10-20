@@ -31,7 +31,7 @@ public class MainFrame extends JFrame {
 		layout = new CardLayout();
 		cards = new JPanel(layout);
 
-		Dorm.parent = this;
+		Dorm.init(this);
 
 		// add cards
 		cards.add(new MapPanel(this), "Map");
