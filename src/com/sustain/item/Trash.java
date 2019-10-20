@@ -3,6 +3,7 @@ package com.sustain.item;
 import processing.core.PApplet;
 import processing.core.PImage;
 
+@SuppressWarnings("all")
 public class Trash {
 	/** declare variables needed in the class Furniture */
 	private static PApplet processing = null;
@@ -18,9 +19,6 @@ public class Trash {
 
 	public Trash(String type, int num, float x, float y, int height,
 			int width) {
-		/** initalize processing */
-		this.processing = processing;
-
 		/** set up the bed image */
 		this.image = processing.loadImage("images/" + type + num + ".png");
 		image.resize(height, width);

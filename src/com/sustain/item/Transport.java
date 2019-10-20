@@ -14,10 +14,11 @@ public class Transport extends VisibleThing {
 	private PApplet processing;
 	private PImage image;
 	public int x = 500, y = 500;
+	public int totalX, totalY;
 
 	public Transport(String type, PApplet processing) {
 		this.processing = processing;
-		image = new PImage(processing.loadImage("./src/images/" + type + ".jpg")
+		image = new PImage(processing.loadImage("images/" + type + ".jpg")
 				.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH));
 	}
 
@@ -43,15 +44,19 @@ public class Transport extends VisibleThing {
 		if (processing.keyPressed && processing.key == PApplet.CODED) {
 			if (processing.keyCode == PApplet.LEFT) {
 				x = x - 2;
+				totalX += 2;
 			}
 			if (processing.keyCode == PApplet.RIGHT) {
 				x = x + 2;
+				totalX += 2;
 			}
 			if (processing.keyCode == PApplet.UP) {
 				y = y - 2;
+				totalY += 2;
 			}
 			if (processing.keyCode == PApplet.DOWN) {
 				y = y + 2;
+				totalY += 2;
 			}
 		}
 	}

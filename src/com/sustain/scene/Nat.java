@@ -4,9 +4,11 @@ import java.awt.Image;
 import java.util.ArrayList;
 
 import com.sustain.item.Transport;
+import com.sustain.main.MainFrame;
 
 import processing.core.PApplet;
 import processing.core.PImage;
+import processing.event.KeyEvent;
 
 /**
  * This file makes the user play the transportsation game
@@ -14,17 +16,23 @@ import processing.core.PImage;
  * @author Lingzheng He
  *
  */
-
 public class Nat extends PApplet {
+	public static double emission;
+	private static MainFrame parent;
 	private static PImage mapImage;// the background image of the room
 	private ArrayList<Transport> transports; // holds all transportsation
 												// methods
 	private Transport transport;
+	private boolean arrived;
+
+	public static void init(MainFrame parent) {
+		Nat.parent = parent;
+	}
 
 	@Override
 	public void settings() {
 		super.settings();
-		mapImage = new PImage(loadImage("./src/images/nat.png").get().getImage()
+		mapImage = new PImage(loadImage("images/nat.png").get().getImage()
 				.getScaledInstance(800, 600, Image.SCALE_SMOOTH));
 		transports = new ArrayList<Transport>(4);
 		transports.add(new Transport("walk", this));
@@ -38,13 +46,11 @@ public class Nat extends PApplet {
 	@Override
 	public void setup() {
 		textSize(50);
-		// fill(0xffffff);
 	}
 
 	@Override
 	public void keyPressed() {
-		if (keyPressed) {
-			System.out.println(key);
+		if (keyPressed && !arrived) {
 			switch (key) {
 				case 'q':
 					transport = transports.get(0);
@@ -66,8 +72,13 @@ public class Nat extends PApplet {
 		int x = transport.x;
 		int y = transport.y;
 		if (110 < x && x < 130 && 150 < y && y < 160) {
-			text("Boom!", 200F, 200F);
-			System.out.println("arrive");
+			text("All Done!\nCongrats!!", 200, 350);
+			arrived = true;
+			Transport trans = transports.get(2);
+			double bus = (trans.totalX + trans.totalY) * 0.4;
+			trans = transports.get(3);
+			double car = (trans.totalX + trans.totalY) * 0.9;
+			emission = bus + car;
 		}
 	}
 
@@ -79,8 +90,11 @@ public class Nat extends PApplet {
 		checkArrive();
 	}
 
-	public static void main(String[] args) {
-		PApplet.main("Nat");
+	@Override
+	public void keyPressed(KeyEvent event) {
+		if (event.getKey() == 'q') {
+			parent.setVisible(true);
+			surface.setVisible(false);
+		}
 	}
-
 }

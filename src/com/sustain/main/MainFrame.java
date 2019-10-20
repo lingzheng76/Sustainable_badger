@@ -1,6 +1,7 @@
 package com.sustain.main;
 
-import java.awt.CardLayout;
+import static javax.swing.JOptionPane.INFORMATION_MESSAGE;
+
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Toolkit;
@@ -10,20 +11,18 @@ import java.awt.event.KeyEvent;
 import java.util.Enumeration;
 
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.plaf.FontUIResource;
 
 import com.sustain.item.Badger;
 import com.sustain.panel.MapPanel;
 import com.sustain.scene.Dorm;
+import com.sustain.scene.Nat;
 import com.sustain.scene.PlantTree;
+import com.sustain.scene.TrashBin;
 
 import processing.core.PApplet;
-
-import static javax.swing.JOptionPane.INFORMATION_MESSAGE;
 
 /**
  * A JFrame as the main window
@@ -32,8 +31,6 @@ import static javax.swing.JOptionPane.INFORMATION_MESSAGE;
  */
 public class MainFrame extends JFrame {
 	private static final long serialVersionUID = 8434228199144892220L;
-	private CardLayout layout;
-	private JPanel cards;
 	private MapPanel mapPanel;
 	private int time;
 
@@ -42,22 +39,16 @@ public class MainFrame extends JFrame {
 		changeToSystemUI();
 		initGlobalFont(new FontUIResource("Comic Sans MS", Font.PLAIN, 14));
 		// create card layout
-		layout = new CardLayout();
-		cards = new JPanel(layout);
 		time = 0;
 
 		// initialize classes that use PApplet
 		Badger.init();
 		Dorm.init(this);
 		PlantTree.init(this);
+		TrashBin.init(this);
+		Nat.init(this);
 
-		// add cards
-		cards.add(mapPanel = new MapPanel(this), "Map");
-		cards.add(new JLabel("Nat"), "Nat");
-		cards.add(new JLabel("Rheta's"), "Rheta's");
-		cards.add(new JLabel("Picnic point"), "Picnic point");
-		cards.add(new JLabel("Dorm"), "Dorm");
-		setContentPane(cards);
+		setContentPane(mapPanel = new MapPanel(this));
 
 		// locate the window in the middle of the screen
 		pack();
@@ -104,9 +95,27 @@ public class MainFrame extends JFrame {
 				JOptionPane.showMessageDialog(this,
 						"You are going to lake shore!\n"
 								+ "Plant more trees to protect the nature perserve!",
-								"", INFORMATION_MESSAGE);
+						"", INFORMATION_MESSAGE);
 				PApplet.main("com.sustain.scene.PlantTree");
 				setVisible(false);
+				break;
+			case "Rheta's":
+				JOptionPane.showMessageDialog(this,
+						"You are going to the Rheta's!\n"
+								+ "Let's learn how to sort trashes!",
+						"", INFORMATION_MESSAGE);
+				PApplet.main("com.sustain.scene.TrashBin");
+				setVisible(false);
+				break;
+			case "Nat":
+				JOptionPane.showMessageDialog(this,
+						"You are going to the Natatorium!\n"
+								+ "Use 'qwer' to change your means of transportation"
+								+ "and use arrow key to move around!",
+						"", INFORMATION_MESSAGE);
+				PApplet.main("com.sustain.scene.Nat");
+				setVisible(false);
+				break;
 			default:
 				break;
 		}

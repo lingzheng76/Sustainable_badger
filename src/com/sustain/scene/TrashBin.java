@@ -3,21 +3,27 @@ package com.sustain.scene;
 import java.util.ArrayList;
 import java.util.Random;
 
-import com.sustain.item.Action;
 import com.sustain.item.DragAndDroppableThing;
 import com.sustain.item.Thing;
 import com.sustain.item.VisibleThing;
+import com.sustain.main.MainFrame;
 
 import processing.core.PApplet;
 import processing.core.PImage;
+import processing.event.KeyEvent;
 
 public class TrashBin extends PApplet {
+	private static MainFrame parent;
 	private PImage logo;
 	private VisibleThing bin1;
 	private VisibleThing bin2;
 	private VisibleThing bin3;
 	private ArrayList<Thing> allThings; // holds all trash items
 	private int score;
+
+	public static void init(MainFrame parent) {
+		TrashBin.parent = parent;
+	}
 
 	/**
 	 * Sets the window
@@ -86,7 +92,7 @@ public class TrashBin extends PApplet {
 			text("All Done!\nCongrats!!", 200, 350);
 		}
 		for (int i = 0; i < allThings.size(); i++) {
-			Action actionObj = allThings.get(i).update();
+			allThings.get(i).update();
 			// act allThings if the actionObj is not null
 			// remove the items that are not active
 			text(score, 700, 60);
@@ -96,15 +102,13 @@ public class TrashBin extends PApplet {
 				score++;
 			}
 		}
-
 	}
 
-	public static void main(String[] args) {
-		/** start the application */
-		PApplet.main("TrashBin");
-
-		// TODO Auto-generated method stub
-
+	@Override
+	public void keyPressed(KeyEvent event) {
+		if (event.getKey() == 'q') {
+			parent.setVisible(true);
+			surface.setVisible(false);
+		}
 	}
-
 }
