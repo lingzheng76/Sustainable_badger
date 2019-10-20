@@ -1,7 +1,10 @@
+package com.sustain.panel;
 import java.awt.BorderLayout;
 
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
+
+import com.sustain.main.MainFrame;
 
 public class MapPanel extends JPanel {
 	private static final long serialVersionUID = -4727595370439989946L;

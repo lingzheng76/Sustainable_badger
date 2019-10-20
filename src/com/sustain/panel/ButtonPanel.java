@@ -1,3 +1,4 @@
+package com.sustain.panel;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -8,6 +9,8 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
+
+import com.sustain.main.MainFrame;
 
 public class ButtonPanel extends JPanel implements ActionListener {
 	private static final long serialVersionUID = -8726704462364227154L;

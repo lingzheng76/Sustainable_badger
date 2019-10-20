@@ -1,23 +1,24 @@
-import java.io.File;
-import java.io.FileNotFoundException;
+package com.sustain.scene;
+
 import java.util.ArrayList;
-import java.util.Scanner;
+
+import com.sustain.item.Badger;
+import com.sustain.item.Furniture;
+import com.sustain.main.MainFrame;
 
 import processing.core.PApplet;
 import processing.core.PImage;
-
-/**
- * 
- */
+import processing.event.KeyEvent;
 
 /**
  * @author Xiaoqi
  *
  */
-public class Lounge extends PApplet {
+public class Dorm extends PApplet {
+	public static MainFrame parent;
 	/** initialize variables */
 	private PImage backgroundImage;// the background image of the room
-	private ArrayList<Furniture> furnitures; // holds all furnitures in the room
+	private ArrayList<Furniture> furnitures; // holds all furniture in the room
 
 	private PImage on;
 	private PImage off;
@@ -64,7 +65,7 @@ public class Lounge extends PApplet {
 	@Override
 	public void draw() {
 		image(backgroundImage, 0, 0); // draw the background
-		
+
 		mousePress();
 //		System.out.println(furnitures.size());
 		if (!furnitures.isEmpty()) {
@@ -73,7 +74,7 @@ public class Lounge extends PApplet {
 				fur.update();
 			}
 		}
-		
+
 		badger.update();
 	}
 
@@ -107,21 +108,20 @@ public class Lounge extends PApplet {
 					backgroundImage = on;
 				}
 			}
-				
+
+		}
+	}
+
+	@Override
+	public void keyPressed(KeyEvent event) {
+		System.out.println(event.getKey());
+		if (event.getKey() == 'q') {
+			parent.setVisible(true);
+			surface.setVisible(false);
 		}
 	}
 
 	protected Badger getbadger() {
 		return badger;
 	}
-	
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		/** start the application */
-		PApplet.main("Lounge");
-	}
-
 }

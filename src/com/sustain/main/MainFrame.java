@@ -1,3 +1,5 @@
+package com.sustain.main;
+
 import java.awt.CardLayout;
 import java.awt.Dimension;
 import java.awt.Toolkit;
@@ -7,6 +9,11 @@ import java.awt.event.KeyEvent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+
+import com.sustain.panel.MapPanel;
+import com.sustain.scene.Dorm;
+
+import processing.core.PApplet;
 
 /**
  * A JFrame as the main window
@@ -23,6 +30,8 @@ public class MainFrame extends JFrame {
 		// create card layout
 		layout = new CardLayout();
 		cards = new JPanel(layout);
+
+		Dorm.parent = this;
 
 		// add cards
 		cards.add(new MapPanel(this), "Map");
@@ -55,7 +64,16 @@ public class MainFrame extends JFrame {
 	}
 
 	public void enter(String name) {
-		layout.show(cards, name);
+//		layout.show(cards, name);
+		switch (name) {
+		case "Dorm":
+			PApplet.main("com.sustain.scene.Dorm");
+			setVisible(false);
+			break;
+
+		default:
+			break;
+		}
 	}
 
 	private void centerAlign() {

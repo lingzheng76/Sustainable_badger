@@ -1,3 +1,4 @@
+package com.sustain.item;
 
 /**
  * This class extends VisibleThing and allows the user to drag the items around the screen.
