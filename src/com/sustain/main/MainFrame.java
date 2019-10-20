@@ -23,6 +23,8 @@ import com.sustain.scene.PlantTree;
 
 import processing.core.PApplet;
 
+import static javax.swing.JOptionPane.INFORMATION_MESSAGE;
+
 /**
  * A JFrame as the main window
  * 
@@ -70,8 +72,9 @@ public class MainFrame extends JFrame {
 		JOptionPane.showMessageDialog(this, "Welcome to UW Madison campus!\n"
 				+ "You can go to four places everyday!\n"
 				+ "See what you can do to live a more sustainable life!\n"
-				+ "Hover your mouse over each pin for more infomation!",
-				"Welcome", JOptionPane.INFORMATION_MESSAGE);
+				+ "Hover your mouse over each pin for more infomation\n"
+				+ "and press 'q' to quit the scene", "Welcome",
+				INFORMATION_MESSAGE);
 
 		setFocusable(true);
 		addKeyListener(new KeyAdapter() {
@@ -88,22 +91,30 @@ public class MainFrame extends JFrame {
 
 	public void enter(String name) {
 //		layout.show(cards, name);
-		if (time > 4) {
-			mapPanel.setEnabled(false);
-			return;
-		}
-		time++;
-		mapPanel.updateTime(time);
 		switch (name) {
 			case "Dorm":
+				JOptionPane.showMessageDialog(this, "You are entering Dorm!\n"
+						+ "Try to find the electrical applicance that waste energy\n"
+						+ "and press 'c' or 'o' to open of close them!", "",
+						INFORMATION_MESSAGE);
 				PApplet.main("com.sustain.scene.Dorm");
 				setVisible(false);
 				break;
 			case "Picnic point":
+				JOptionPane.showMessageDialog(this,
+						"You are going to lake shore!\n"
+								+ "Plant more trees to protect the nature perserve!",
+								"", INFORMATION_MESSAGE);
 				PApplet.main("com.sustain.scene.PlantTree");
 				setVisible(false);
 			default:
 				break;
+		}
+		time++;
+		mapPanel.updateTime(time);
+		if (time > 3) {
+			mapPanel.setEnabled(false);
+			return;
 		}
 	}
 

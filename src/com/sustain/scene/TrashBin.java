@@ -1,5 +1,13 @@
+package com.sustain.scene;
+
 import java.util.ArrayList;
-import java.util.*;
+import java.util.Random;
+
+import com.sustain.item.Action;
+import com.sustain.item.DragAndDroppableThing;
+import com.sustain.item.Thing;
+import com.sustain.item.VisibleThing;
+
 import processing.core.PApplet;
 import processing.core.PImage;
 
@@ -40,12 +48,18 @@ public class TrashBin extends PApplet {
 		int[] recycled = { rand.nextInt(2) + 1, rand.nextInt(2) + 3 };
 		int[] wasted = { rand.nextInt(2) + 1, rand.nextInt(2) + 3 };
 
-		DragAndDroppableThing composed1 = new DragAndDroppableThing("compost" + composed[0], 150, 350, bin1, null);
-		DragAndDroppableThing composed2 = new DragAndDroppableThing("compost" + composed[1], 300, 350, bin1, null);
-		DragAndDroppableThing recylced1 = new DragAndDroppableThing("recyclable" + recycled[0], 450, 350, bin3, null);
-		DragAndDroppableThing recylced2 = new DragAndDroppableThing("recyclable" + recycled[1], 150, 500, bin3, null);
-		DragAndDroppableThing trash1 = new DragAndDroppableThing("food" + wasted[0], 300, 500, bin2, null);
-		DragAndDroppableThing trash2 = new DragAndDroppableThing("food" + wasted[1], 450, 500, bin2, null);
+		DragAndDroppableThing composed1 = new DragAndDroppableThing(
+				"compost" + composed[0], 150, 350, bin1, null);
+		DragAndDroppableThing composed2 = new DragAndDroppableThing(
+				"compost" + composed[1], 300, 350, bin1, null);
+		DragAndDroppableThing recylced1 = new DragAndDroppableThing(
+				"recyclable" + recycled[0], 450, 350, bin3, null);
+		DragAndDroppableThing recylced2 = new DragAndDroppableThing(
+				"recyclable" + recycled[1], 150, 500, bin3, null);
+		DragAndDroppableThing trash1 = new DragAndDroppableThing(
+				"food" + wasted[0], 300, 500, bin2, null);
+		DragAndDroppableThing trash2 = new DragAndDroppableThing(
+				"food" + wasted[1], 450, 500, bin2, null);
 
 		allThings.add(bin1);
 		allThings.add(bin2);
@@ -82,7 +96,6 @@ public class TrashBin extends PApplet {
 				score++;
 			}
 		}
-		
 
 	}
 
