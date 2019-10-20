@@ -1,5 +1,10 @@
 package com.sustain.item;
 
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
+
 import processing.core.PApplet;
 import processing.core.PImage;
 
@@ -14,15 +19,26 @@ import processing.core.PImage;
 public class Badger {
 	private int x = 400; // x-axis
 	private int y = 350; // y-axis
-	private PImage badger_right;
-	private PImage badger_left;
+	private static PImage badger_right;
+	private static PImage badger_left;
 	private PImage badger;
 	private PApplet processing;
 
+	public static void init() {
+		try {
+			badger_right = new PImage(
+					ImageIO.read(new File("images/badger_right.png")));
+			badger_left = new PImage(
+					ImageIO.read(new File("images/badger_left.png")));
+		} catch (IOException e) {
+			System.err
+					.println("Cannot load badger_left.png of badger_right.png");
+			System.exit(-1);
+		}
+	}
+
 	public Badger(PApplet processing) {
 		this.processing = processing;
-		badger_right = processing.loadImage("images/badger_right.png");
-		badger_left = processing.loadImage("images/badger_left.png");
 		badger = badger_right;
 	}
 

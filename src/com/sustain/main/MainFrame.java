@@ -16,6 +16,7 @@ import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.plaf.FontUIResource;
 
+import com.sustain.item.Badger;
 import com.sustain.panel.MapPanel;
 import com.sustain.scene.Dorm;
 import com.sustain.scene.PlantTree;
@@ -44,6 +45,7 @@ public class MainFrame extends JFrame {
 		time = 0;
 
 		// initialize classes that use PApplet
+		Badger.init();
 		Dorm.init(this);
 		PlantTree.init(this);
 
@@ -86,12 +88,12 @@ public class MainFrame extends JFrame {
 
 	public void enter(String name) {
 //		layout.show(cards, name);
-		time++;
-		mapPanel.updateTime(time);
-		if (time >= 4) {
+		if (time > 4) {
 			mapPanel.setEnabled(false);
 			return;
 		}
+		time++;
+		mapPanel.updateTime(time);
 		switch (name) {
 			case "Dorm":
 				PApplet.main("com.sustain.scene.Dorm");

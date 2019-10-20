@@ -26,15 +26,6 @@ public class PlantTree extends PApplet {
 		PlantTree.parent = parent;
 	}
 
-//	/**
-//	 * Main method that represents the driver of this application
-//	 * 
-//	 * @param arg
-//	 */
-//	public static void main(String[] arg) {
-//		PApplet.main("com.sustain.item.PlantTree"); // Call the driver method
-//	}
-
 	/*
 	 * (non-Javadoc)
 	 * 
