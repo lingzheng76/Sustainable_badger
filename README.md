@@ -1,5 +1,6 @@
 # Sustainable Badger
 Play an interactive game and choose between sustainable and less sustainable options
+## Instruction: Run MainFrame to run the program
 ### Map
 - Explore different places on the UW campus and learn how to live a more sustainbale life
 ### Dorm
