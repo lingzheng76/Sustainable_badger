@@ -39,7 +39,7 @@ public class Furniture {
 	private static PApplet processing = null;
 	private PImage image;
 	private float[] position;
-	public boolean isOn;
+	// public boolean isOn;
 	private int height;
 	private int width;
 	// private int rotations;
@@ -50,16 +50,12 @@ public class Furniture {
 	public Furniture(String type, int height, int width) {
 		/** initalize processing */
 		this.processing = processing;
-		isOn = true;
-		/** set up the bed image */
 
-		// /**draw the image at the center of the display*/
-		// processing.image(image, processing.width / 2, processing.height / 2);
-		// width [resp. height]: System variable of the processing library that stores
-		// the width [resp. height] of the display window.
 		this.type = type;
-		// /** set up the position of the furniture */
+
+		/** set up the position of the furniture */
 		position = new float[] { processing.width / 2, processing.height / 2 };
+
 		this.height = height;
 		this.width = width;
 	}
@@ -67,17 +63,16 @@ public class Furniture {
 	public Furniture(String type, float x, float y, int height, int width) {
 		/** initalize processing */
 		this.processing = processing;
+
 		/** set up the bed image */
 		this.image = processing.loadImage("images/" + type + ".jpeg");
 		image.resize(height, width);
-		// this.image = processing.loadImage("images/"+type+".png");
-		/** draw the image at the center of the display */
-		// processing.image(image, processing.width / 2, processing.height / 2);
-		// width [resp. height]: System variable of the processing library that stores
-		// the width [resp. height] of the display window.
+
 		this.type = type;
+
 		/** set up the position of the furniture */
 		position = new float[] { x, y };
+
 		this.height = height;
 		this.width = width;
 
@@ -85,102 +80,26 @@ public class Furniture {
 
 	// draws this bed at its current position
 	public void update() {
-		// // /** track the position of the mouse when the furniture is being dragged */
-		// if (isMouseOver() && processing.mousePressed) {
-		// if (!isOn) {
-		// isOn = true;
-		//
-		// }
-		// else {
-		// isOn = false;
-		// removeFur();
-		// }
-		// // position[0] = processing.mouseX;
-		// // position[1] = processing.mouseY;
-		// }
-
 		/** draw the furniture at the current position */
 		processing.image(image, position[0], position[1]);
 
 	}
 
-//	private void removeFur() {
-//		// TODO Auto-generated method stub
-//
-//	}
-
-	/**
-	 * set the size of the image
-	 */
-	// public void resize(int x, int y) {
-	// height = x;
-	// width = y;
-	//
-	// }
-
-	// // used to start dragging the bed, when the mouse is over this bed when it is
-	// // pressed
-	// public void mouseDown(Furniture furniture[]) {
-	// /** modify is dragging */
-	// isOn = true;
-	//
-	// }
-	//
-	// // used to indicate that the bed is no longer being dragged
-	// public void mouseUp() {
-	// /** reset isOn with the mouse up */
-	// isOn = false;
-	// }
-
 	// helper method to determine whether the mouse is currently over this bed
 	public boolean isOver(Badger badger) {
-		// /** set up height and width of the furniture */
-		// float height = image.height;
-		// float width = image.width;
-		// /**
-		// * check if the furniture has been rotated and modify the height and width if
-		// * that is the case
-		// */
-		// if (image.height > image.width) {
-		// height = width;
-		// width = image.height;
-		// }
+
 		int height = badger.getHeight();
 		int width = badger.getWidth();
 		int x = badger.getPosX();
 		int y = badger.getPosY();
-		boolean xNotOverlap = // true if other is next to but not overlapping with this thing
-				x >= (position[0] + this.width) || (x + width) <= position[0];
-		boolean yNotOverlap = // true if other is above or below but not overlapping with this thing
-				position[1] >= (y + height) || (position[1] + this.height) <= y;
-		return !(xNotOverlap || yNotOverlap);
 
-		// /**
-		// * check if the mouse in the range of the furniture and return T/F
-		// respectively
-		// */
-		// if ((position[0] - width / 2) < processing.mouseX && processing.mouseX <
-		// (position[0] + width / 2)
-		// && (position[1] - height / 2) < processing.mouseY && (position[1] +
-		// this.height / 2) > processing.mouseY) {
-		// return true;
-		// } else {
-		// return false;
-		// }
+		boolean leftof = ((x + (0.5 * width)) < (position[0] - (0.5 * this.width)));
+		boolean rightof = ((x - (0.5 * width)) > (position[0] + (0.5 * this.width)));
+		boolean above = ((y - (0.5 * height)) > (position[1] + (0.5 * this.height)));
+		boolean below = ((y + (0.5 * height)) < (position[1] - (0.5 * this.height)));
+		return !(leftof == true || rightof == true || above == true || below == true);
 	}
 
-	// //rotate the furniture
-	// public void rotate() {
-	// /**implement the parameter rotations*/
-	// ++rotations;
-	// /**draw the bed after rotating it*/
-	// processing.image(image, position[0], position[1], position[2]*PApplet.PI/2);
-	// }
-	//
-	// public int getRotation() {
-	// return rotations;
-	// }
-	//
 	/**
 	 * Set the processing field of the thing
 	 * 
