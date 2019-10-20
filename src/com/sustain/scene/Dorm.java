@@ -21,9 +21,9 @@ import processing.event.KeyEvent;
 public class Dorm extends PApplet {
 	public static MainFrame parent;
 	/** initialize variables */
-	private PImage backgroundImage;// the background image of the room
 	private ArrayList<Furniture> furnitures; // holds all furniture in the room
 
+	private static PImage backgroundImage;// the background image of the room
 	private static PImage on;
 	private static PImage off;
 	private boolean lightOff;
@@ -44,6 +44,7 @@ public class Dorm extends PApplet {
 		try {
 			on = new PImage(ImageIO.read(new File("images/dorm.jpeg")));
 			off = new PImage(ImageIO.read(new File("images/light.jpeg")));
+			backgroundImage = on;
 		} catch (IOException e) {
 			System.err.println("Cannot load dorm.jpeg or light.jpeg");
 			System.exit(-1);
@@ -55,6 +56,7 @@ public class Dorm extends PApplet {
 		on.resize(800, 600);
 		off.resize(800, 600);
 		Dorm.parent = parent;
+		backgroundImage=on;
 	}
 
 	/**
@@ -62,7 +64,6 @@ public class Dorm extends PApplet {
 	 */
 	@Override
 	public void setup() {
-		backgroundImage = on;
 		furnitures = new ArrayList<Furniture>();
 		Furniture.setProcessing(this);
 		badger = new Badger(this);
@@ -95,37 +96,38 @@ public class Dorm extends PApplet {
 		badger.update();
 	}
 
+
+
 	public void mousePress() {
 		if (keyPressed) {
-			if (fire.isOver(badger) && key == ' ') {
-				if (!furnitures.contains(fire)) {
-//					fire.isOn = true;
+			if (fire.isOver(badger)) {
+				if (!furnitures.contains(fire) && key == 'o') {
+					// fire.isOn = true;
 					furnitures.add(fire);
-				} else {
-//					fire.isOn = false;
+				} else if (key == 'c') {
+					System.out.println("fire off");
+					// fire.isOn = false;
 					furnitures.remove(fire);
 				}
 			}
 
-			else if (tv.isOver(badger) && key == ' ') {
-				if (!furnitures.contains(tv)) {
+			else if (tv.isOver(badger)) {
+				if (!furnitures.contains(tv) && key == 'o') {
 					furnitures.add(tv);
-				} else {
+				} else if (key == 'c') {
 					furnitures.remove(tv);
 				}
 			}
 
-			else if (key == ' ') {
-				if (!lightOff) {
-					lightOff = true;
-					backgroundImage = off;
-				} else {
-					lightOff = false;
-					backgroundImage = on;
-				}
+			else if (key == 'c') {
+				lightOff = true;
+				backgroundImage = off;
+			} else if (key == 'o') {
+				lightOff = false;
+				backgroundImage = on;
 			}
-
 		}
+
 	}
 
 	@Override
@@ -135,8 +137,19 @@ public class Dorm extends PApplet {
 			surface.setVisible(false);
 		}
 	}
+	
 
-	protected Badger getbadger() {
-		return badger;
-	}
+//	protected Badger getbadger() {
+//		return badger;
+//	}
+
+//	/**
+//	 * @param args
+//	 */
+//	public static void main(String[] args) {
+//		// TODO Auto-generated method stub
+//		/** start the application */
+//		PApplet.main("Dorm");
+//	}
+
 }
