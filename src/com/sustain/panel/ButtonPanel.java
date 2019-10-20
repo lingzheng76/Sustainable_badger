@@ -1,4 +1,6 @@
 package com.sustain.panel;
+
+import java.awt.Component;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -57,5 +59,12 @@ public class ButtonPanel extends JPanel implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		parent.enter(e.getActionCommand());
+	}
+
+	@Override
+	public void setEnabled(boolean enabled) {
+		for (Component comp : getComponents()) {
+			comp.setEnabled(enabled);
+		}
 	}
 }

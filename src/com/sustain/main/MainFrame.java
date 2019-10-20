@@ -3,6 +3,7 @@ package com.sustain.main;
 import java.awt.CardLayout;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
@@ -24,6 +25,8 @@ public class MainFrame extends JFrame {
 	private static final long serialVersionUID = 8434228199144892220L;
 	private CardLayout layout;
 	private JPanel cards;
+	private MapPanel mapPanel;
+	private int time = 5;
 
 	public MainFrame() {
 		super();
@@ -34,7 +37,7 @@ public class MainFrame extends JFrame {
 		Dorm.init(this);
 
 		// add cards
-		cards.add(new MapPanel(this), "Map");
+		cards.add(mapPanel = new MapPanel(this), "Map");
 		cards.add(new JLabel("Nat"), "Nat");
 		cards.add(new JLabel("Rheta's"), "Rheta's");
 		cards.add(new JLabel("Picnic point"), "Picnic point");
@@ -46,6 +49,7 @@ public class MainFrame extends JFrame {
 		centerAlign();
 
 		// set the behavior of the window
+		setResizable(false);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setTitle("Which garbage are you???"); // TODO: change
 		setVisible(true);
@@ -65,6 +69,10 @@ public class MainFrame extends JFrame {
 
 	public void enter(String name) {
 //		layout.show(cards, name);
+		time--;
+		if (time == 0) {
+			mapPanel.setEnabled(false);
+		}
 		switch (name) {
 		case "Dorm":
 			PApplet.main("com.sustain.scene.Dorm");
@@ -74,6 +82,11 @@ public class MainFrame extends JFrame {
 		default:
 			break;
 		}
+	}
+	
+	public void reset(ActionEvent e) {
+		time = 5;
+		mapPanel.setEnabled(true);
 	}
 
 	private void centerAlign() {
