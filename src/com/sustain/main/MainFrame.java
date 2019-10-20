@@ -131,7 +131,8 @@ public class MainFrame extends JFrame {
 		JOptionPane.showMessageDialog(this,
 				"Congradulations! You have completed you day!\n"
 						+ Nat.getReuslt() + TrashBin.getResult()
-						+ PlantTree.getResult() + Dorm.getResult());
+						+ PlantTree.getResult() + Dorm.getResult(),
+				"", INFORMATION_MESSAGE);
 		time = 0;
 		mapPanel.setEnabled(true);
 		mapPanel.updateTime(0);

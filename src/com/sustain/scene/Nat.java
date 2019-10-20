@@ -74,7 +74,7 @@ public class Nat extends PApplet {
 		int x = Transport.x;
 		int y = Transport.y;
 		if (110 < x && x < 130 && 150 < y && y < 160) {
-			text("All Done!\nCongrats!!", 200, 350);
+			text("You arrived Natatorium!", 150, 150);
 			arrived = true;
 			Transport trans = transports.get(2);
 			double bus = (trans.totalX + trans.totalY) * 0.4;
