@@ -1,4 +1,3 @@
-package com.sustain.item;
 
 /**
  * This class extends VisibleThing and allows the user to drag the items around the screen.
@@ -19,7 +18,7 @@ public class DraggableThing extends VisibleThing {
      * @param y the vertical position that will be assigned to the object
      */
     public DraggableThing(String name, int x, int y) {
-        super(name, x, y); // calls the constructor of VisibleThing
+        super(name, x, y,50, 50); // calls the constructor of VisibleThing
         mouseWasPressed = false; // sets mouseWasPressed to false
         isDragging = false; // sets isDragging to false
         oldMouseX = x; // sets oldMouseX to x
