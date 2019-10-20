@@ -1,19 +1,14 @@
-package com.sustain.scene;
-
 import java.util.ArrayList;
-import java.util.Random;
-
-import com.sustain.item.Trash;
-
+import java.util.*;
 import processing.core.PApplet;
 import processing.core.PImage;
 
 public class TrashBin extends PApplet {
 	private PImage logo;
-	private PImage bin1;
-	private PImage bin2;
-	private PImage bin3;
-	private ArrayList<Trash> trash; // holds all trash items
+	private VisibleThing bin1;
+	private VisibleThing bin2;
+	private VisibleThing bin3;
+	private ArrayList<Thing> allThings; // holds all trash items
 
 	/**
 	 * Sets the window
@@ -28,17 +23,15 @@ public class TrashBin extends PApplet {
 	 */
 	@Override
 	public void setup() {
+		this.allThings = new ArrayList<Thing>();
+		Thing.setProcessing(this);
+
 		logo = loadImage("images/rheta.png");
 		logo.resize(320, 300);
-		bin1 = loadImage("images/bin1.png");
-		bin1.resize(100, 200);
-		bin2 = loadImage("images/bin2.png");
-		bin2.resize(100, 200);
-		bin3 = loadImage("images/bin3.png");
-		bin3.resize(100, 200);
-
-		this.trash = new ArrayList<Trash>();
-		Trash.setProcessing(this);
+		bin1 = new VisibleThing("bin1", 150, 50);
+		bin2 = new VisibleThing("bin2", 300, 50);
+		bin3 = new VisibleThing("bin3", 450, 50);
+		;
 
 		Random rand = new Random();
 
@@ -46,21 +39,22 @@ public class TrashBin extends PApplet {
 		int[] recycled = { rand.nextInt(2) + 1, rand.nextInt(2) + 3 };
 		int[] wasted = { rand.nextInt(2) + 1, rand.nextInt(2) + 3 };
 
-		Trash composed1 = new Trash("compost", composed[0], 150, 350, 100, 100);
-		Trash composed2 = new Trash("compost", composed[1], 300, 350, 100, 100);
-		Trash recylced1 = new Trash("recyclable", recycled[0], 450, 350, 100,
-				100);
-		Trash recylced2 = new Trash("recyclable", recycled[1], 150, 500, 100,
-				100);
-		Trash trash1 = new Trash("food", wasted[0], 300, 500, 100, 100);
-		Trash trash2 = new Trash("food", wasted[1], 450, 500, 100, 100);
+		DragAndDroppableThing composed1 = new DragAndDroppableThing("compost" + composed[0], 150, 350, bin1, null);
+		DragAndDroppableThing composed2 = new DragAndDroppableThing("compost" + composed[1], 300, 350, bin1, null);
+		DragAndDroppableThing recylced1 = new DragAndDroppableThing("recyclable" + recycled[0], 450, 350, bin2, null);
+		DragAndDroppableThing recylced2 = new DragAndDroppableThing("recyclable" + recycled[1], 150, 500, bin2, null);
+		DragAndDroppableThing trash1 = new DragAndDroppableThing("food" + wasted[0], 300, 500, bin3, null);
+		DragAndDroppableThing trash2 = new DragAndDroppableThing("food" + wasted[1], 450, 500, bin3, null);
 
-		trash.add(composed1);
-		trash.add(composed2);
-		trash.add(recylced1);
-		trash.add(recylced2);
-		trash.add(trash1);
-		trash.add(trash2);
+		allThings.add(bin1);
+		allThings.add(bin2);
+		allThings.add(bin3);
+		allThings.add(composed1);
+		allThings.add(composed2);
+		allThings.add(recylced1);
+		allThings.add(recylced2);
+		allThings.add(trash1);
+		allThings.add(trash2);
 	}
 
 	/**
@@ -70,13 +64,15 @@ public class TrashBin extends PApplet {
 	public void draw() {
 		background(201, 233, 246);
 		image(logo, 480, 300);
-
-		image(bin1, 150, 50);
-		image(bin2, 300, 50);
-		image(bin3, 450, 50);
-
-		for (Trash t : trash) {
-			t.update();
+		// iterate the allThings list to update each item
+		for (int i = 0; i < allThings.size(); i++) {
+			Action actionObj = allThings.get(i).update();
+			// act allThings if the actionObj is not null
+			// remove the items that are not active
+			if (!allThings.get(i).isActive()) {
+				allThings.remove(i);
+				i--;
+			}
 		}
 
 	}
