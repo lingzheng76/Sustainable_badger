@@ -28,9 +28,9 @@ public class TrashBin extends PApplet {
 
 		logo = loadImage("images/rheta.png");
 		logo.resize(320, 300);
-		bin1 = new VisibleThing("bin1", 150, 50);
-		bin2 = new VisibleThing("bin2", 300, 50);
-		bin3 = new VisibleThing("bin3", 450, 50);
+		bin1 = new VisibleThing("bin1", 100, 50, 130, 250);
+		bin2 = new VisibleThing("bin2", 300, 50, 130, 250);
+		bin3 = new VisibleThing("bin3", 500, 50, 130, 250);
 		;
 
 		Random rand = new Random();
