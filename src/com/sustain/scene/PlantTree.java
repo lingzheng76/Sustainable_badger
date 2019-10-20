@@ -1,26 +1,39 @@
-package com.sustain.item;
+package com.sustain.scene;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import com.sustain.item.Action;
+import com.sustain.item.DragAndDroppableThing;
+import com.sustain.item.Thing;
+import com.sustain.item.VisibleThing;
+import com.sustain.main.MainFrame;
+
 import processing.core.PApplet;
 import processing.core.PImage;
+import processing.event.KeyEvent;
 
 public class PlantTree extends PApplet {
+	private static MainFrame parent;
 	private PImage backgroundImage; // The background image of the game
 	private ArrayList<Thing> allThings; // Create an ArrayList to store all
 										// items that will be
 										// displayed in the game
 
-	/**
-	 * Main method that represents the driver of this application
-	 * 
-	 * @param arg
-	 */
-	public static void main(String[] arg) {
-		PApplet.main("PlantTree"); // Call the driver method
+	public static void init(MainFrame parent) {
+		PlantTree.parent = parent;
 	}
+
+//	/**
+//	 * Main method that represents the driver of this application
+//	 * 
+//	 * @param arg
+//	 */
+//	public static void main(String[] arg) {
+//		PApplet.main("com.sustain.item.PlantTree"); // Call the driver method
+//	}
 
 	/*
 	 * (non-Javadoc)
@@ -41,7 +54,7 @@ public class PlantTree extends PApplet {
 	public void setup() {
 		Thing.setProcessing(this);
 		allThings = new ArrayList<>();
-		loadPicnicPoint("location" + File.separator + "PicnicPoint.txt");
+		loadPicnicPoint("PicnicPoint.txt");
 	}
 
 	/*
@@ -64,6 +77,14 @@ public class PlantTree extends PApplet {
 				allThings.remove(i);
 				i--;
 			}
+		}
+	}
+
+	@Override
+	public void keyPressed(KeyEvent event) {
+		if (event.getKey() == 'q') {
+			parent.setVisible(true);
+			surface.setVisible(false);
 		}
 	}
 

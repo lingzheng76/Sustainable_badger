@@ -21,10 +21,8 @@ public class Badger {
 
 	public Badger(PApplet processing) {
 		this.processing = processing;
-		badger_right = processing.loadImage(
-				"C:\\Users\\mic\\eclipse-workspace\\Hackthon\\src\\images\\badger_right.png");
-		badger_left = processing.loadImage(
-				"C:\\Users\\mic\\eclipse-workspace\\Hackthon\\src\\images\\badger_left.png");
+		badger_right = processing.loadImage("images/badger_right.png");
+		badger_left = processing.loadImage("images/badger_left.png");
 		badger = badger_right;
 	}
 

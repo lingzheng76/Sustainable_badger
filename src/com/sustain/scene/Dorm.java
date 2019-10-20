@@ -19,7 +19,7 @@ import processing.event.KeyEvent;
  *
  */
 public class Dorm extends PApplet {
-	public static MainFrame parent;
+	private static MainFrame parent;
 	/** initialize variables */
 	private ArrayList<Furniture> furnitures; // holds all furniture in the room
 
@@ -102,7 +102,6 @@ public class Dorm extends PApplet {
 					// fire.isOn = true;
 					furnitures.add(fire);
 				} else if (key == 'c') {
-					System.out.println("fire off");
 					// fire.isOn = false;
 					furnitures.remove(fire);
 				}

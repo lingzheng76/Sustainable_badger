@@ -18,6 +18,7 @@ import javax.swing.plaf.FontUIResource;
 
 import com.sustain.panel.MapPanel;
 import com.sustain.scene.Dorm;
+import com.sustain.scene.PlantTree;
 
 import processing.core.PApplet;
 
@@ -31,7 +32,7 @@ public class MainFrame extends JFrame {
 	private CardLayout layout;
 	private JPanel cards;
 	private MapPanel mapPanel;
-	int time;
+	private int time;
 
 	public MainFrame() {
 		super();
@@ -44,6 +45,7 @@ public class MainFrame extends JFrame {
 
 		// initialize classes that use PApplet
 		Dorm.init(this);
+		PlantTree.init(this);
 
 		// add cards
 		cards.add(mapPanel = new MapPanel(this), "Map");
@@ -95,7 +97,9 @@ public class MainFrame extends JFrame {
 				PApplet.main("com.sustain.scene.Dorm");
 				setVisible(false);
 				break;
-
+			case "Picnic point":
+				PApplet.main("com.sustain.scene.PlantTree");
+				setVisible(false);
 			default:
 				break;
 		}
