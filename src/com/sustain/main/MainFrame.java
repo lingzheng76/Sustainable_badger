@@ -110,7 +110,7 @@ public class MainFrame extends JFrame {
 			case "Nat":
 				JOptionPane.showMessageDialog(this,
 						"You are going to the Natatorium!\n"
-								+ "Use 'qwer' to change your means of transportation\n"
+								+ "Use 'wert' to change your means of transportation\n"
 								+ "and use arrow key to move around!",
 						"", INFORMATION_MESSAGE);
 				PApplet.main("com.sustain.scene.Nat");

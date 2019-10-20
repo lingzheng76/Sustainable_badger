@@ -54,16 +54,16 @@ public class Nat extends PApplet {
 	public void keyPressed() {
 		if (keyPressed && !arrived) {
 			switch (key) {
-				case 'q':
+				case 'w':
 					transport = transports.get(0);
 					break;
-				case 'w':
+				case 'e':
 					transport = transports.get(1);
 					break;
-				case 'e':
+				case 'r':
 					transport = transports.get(2);
 					break;
-				case 'r':
+				case 't':
 					transport = transports.get(3);
 					break;
 			}
