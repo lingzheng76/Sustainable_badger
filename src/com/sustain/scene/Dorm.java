@@ -114,7 +114,6 @@ public class Dorm extends PApplet {
 
 	@Override
 	public void keyPressed(KeyEvent event) {
-		System.out.println(event.getKey());
 		if (event.getKey() == 'q') {
 			parent.setVisible(true);
 			surface.setVisible(false);
