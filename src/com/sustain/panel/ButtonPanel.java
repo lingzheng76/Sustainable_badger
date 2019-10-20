@@ -30,15 +30,15 @@ public class ButtonPanel extends JPanel implements ActionListener {
 		// load icon
 		Image image = null;
 		try {
-			image = ImageIO.read(new File("images/pin.png")).getScaledInstance(BUTTON_WIDTH, BUTTON_HEIGHT,
-					Image.SCALE_SMOOTH);
+			image = ImageIO.read(new File("images/pin.png")).getScaledInstance(
+					BUTTON_WIDTH, BUTTON_HEIGHT, Image.SCALE_SMOOTH);
 		} catch (IOException e) {
 			System.err.println("Cannot load pin.png");
 			System.exit(-1);
 		}
 		ImageIcon icon = new ImageIcon(image);
 
-		// create buttons
+		// create buttons with magic coordinates
 		addButton(icon, "Nat", 172, 190);
 		addButton(icon, "Rheta's", 200, 300);
 		addButton(icon, "Dorm", 590, 530);

@@ -1,3 +1,5 @@
+package com.sustain.item;
+
 import processing.core.PApplet;
 import processing.core.PImage;
 
@@ -10,15 +12,17 @@ public class Trash {
 	private int width;
 	public String type;
 
-	// initializes the fields of a new bed object positioned in the center of the
+	// initializes the fields of a new bed object positioned in the center of
+	// the
 	// display
 
-	public Trash(String type, int num, float x, float y, int height, int width) {
+	public Trash(String type, int num, float x, float y, int height,
+			int width) {
 		/** initalize processing */
 		this.processing = processing;
 
 		/** set up the bed image */
-		this.image = processing.loadImage("images/" + type + num +  ".png");
+		this.image = processing.loadImage("images/" + type + num + ".png");
 		image.resize(height, width);
 
 		this.type = type;
@@ -57,10 +61,10 @@ public class Trash {
 	/**
 	 * Set the processing field of the thing
 	 * 
-	 * @param processing
-	 *            the reference to the processing of the escape room
+	 * @param processing the reference to the processing of the escape room
 	 */
-	public static void setProcessing(PApplet processing) { // initializes processing field
+	public static void setProcessing(PApplet processing) { // initializes
+															// processing field
 		Trash.processing = processing;
 	}
 
@@ -69,13 +73,15 @@ public class Trash {
 	 * 
 	 * @return the reference to the processing of the escape room
 	 */
-	protected static PApplet getProcessing() { // accessor method to retrieve this static field
+	protected static PApplet getProcessing() { // accessor method to retrieve
+												// this static field
 		return Trash.processing;
 	}
 
 	public float[] getPosition() {
 		return position;
 	}
+
 	public Trash(String type) {
 		this.type = type;
 	}

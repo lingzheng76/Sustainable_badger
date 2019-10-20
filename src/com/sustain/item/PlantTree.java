@@ -1,3 +1,5 @@
+package com.sustain.item;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -7,7 +9,8 @@ import processing.core.PImage;
 
 public class PlantTree extends PApplet {
 	private PImage backgroundImage; // The background image of the game
-	private ArrayList<Thing> allThings; // Create an ArrayList to store all items that will be
+	private ArrayList<Thing> allThings; // Create an ArrayList to store all
+										// items that will be
 										// displayed in the game
 
 	/**
@@ -65,13 +68,13 @@ public class PlantTree extends PApplet {
 	}
 
 	/**
-	 * This method loads a background image, prints out some introductory text, and
-	 * then reads in a set of thing descriptions from a text file with the provided
-	 * name. The image is stored in this.backgroundImage, and the activated things
-	 * are added to the this.allThings list.
+	 * This method loads a background image, prints out some introductory text,
+	 * and then reads in a set of thing descriptions from a text file with the
+	 * provided name. The image is stored in this.backgroundImage, and the
+	 * activated things are added to the this.allThings list.
 	 * 
-	 * @param filename - relative path of file to load, relative to current working
-	 *                 directory
+	 * @param filename - relative path of file to load, relative to current
+	 *                 working directory
 	 */
 	private void loadPicnicPoint(String filename) {
 		// start reading file contents
@@ -82,7 +85,8 @@ public class PlantTree extends PApplet {
 
 			// read and store background image
 			String backgroundImageFilename = fin.nextLine().trim();
-			backgroundImageFilename = "images" + File.separator + backgroundImageFilename + ".png";
+			backgroundImageFilename = "images" + File.separator
+					+ backgroundImageFilename + ".png";
 			backgroundImage = loadImage(backgroundImageFilename);
 			lineNumber++;
 
@@ -105,12 +109,15 @@ public class PlantTree extends PApplet {
 				}
 				lineNumber++;
 			}
-			// catch and report warnings related to any problems experienced loading this
+			// catch and report warnings related to any problems experienced
+			// loading this
 			// file
 		} catch (FileNotFoundException e) { // catch FileNotFoundException
-			System.out.println("WARNING: Unable to find or load file: " + filename);
+			System.out.println(
+					"WARNING: Unable to find or load file: " + filename);
 		} catch (RuntimeException e) { // catch RuntimeException
-			System.out.println("WARNING: Problem loading file: " + filename + " line: " + lineNumber);
+			System.out.println("WARNING: Problem loading file: " + filename
+					+ " line: " + lineNumber);
 			e.printStackTrace();
 		} finally {
 			if (fin != null)
@@ -136,12 +143,12 @@ public class PlantTree extends PApplet {
 
 	/**
 	 * Helper method to retrieve thing references from allThings, based on their
-	 * names. If multiple things have that name, this method will return the first
-	 * (lowest-index) reference found.
+	 * names. If multiple things have that name, this method will return the
+	 * first (lowest-index) reference found.
 	 * 
 	 * @param name is the name of the object that is being found
-	 * @return a reference to a thing with the specified name, or null when none is
-	 *         found
+	 * @return a reference to a thing with the specified name, or null when none
+	 *         is found
 	 */
 	private Thing findThingByName(String name) {
 		for (int i = 0; i < allThings.size(); i++)
@@ -157,12 +164,13 @@ public class PlantTree extends PApplet {
 	 * properties specified as strings within the provided parts array.
 	 * 
 	 * @param parts contains the following strings in this order: - D: indicates
-	 *              that a DragAndDroppableThing is being created - name: the name
-	 *              of the newly created thing - x: the starting x position (as an
-	 *              int) for this thing - y: the starting y position (as an int) for
-	 *              this thing - message: a string of text to display when this
-	 *              thing is dropped on target - name of thing to activate
-	 *              (optional): activates this thing when dropped on target
+	 *              that a DragAndDroppableThing is being created - name: the
+	 *              name of the newly created thing - x: the starting x position
+	 *              (as an int) for this thing - y: the starting y position (as
+	 *              an int) for this thing - message: a string of text to
+	 *              display when this thing is dropped on target - name of thing
+	 *              to activate (optional): activates this thing when dropped on
+	 *              target
 	 * @return the newly created object
 	 */
 	private DragAndDroppableThing loadNewDragAndDroppableThing(String[] parts) {
@@ -176,8 +184,8 @@ public class PlantTree extends PApplet {
 		Thing activate = null;
 		activate = findThingByName(parts[5].trim());
 		// create new thing
-		DragAndDroppableThing newThing = new DragAndDroppableThing(name, x, y, (VisibleThing) dropTarget,
-				new Action(activate));
+		DragAndDroppableThing newThing = new DragAndDroppableThing(name, x, y,
+				(VisibleThing) dropTarget, new Action(activate));
 		return newThing;
 	}
 }

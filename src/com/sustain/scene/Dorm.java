@@ -26,7 +26,6 @@ public class Dorm extends PApplet {
 	private static PImage backgroundImage;// the background image of the room
 	private static PImage on;
 	private static PImage off;
-	private boolean lightOff;
 	private Furniture tv;
 	private Furniture fire;
 
@@ -56,7 +55,7 @@ public class Dorm extends PApplet {
 		on.resize(800, 600);
 		off.resize(800, 600);
 		Dorm.parent = parent;
-		backgroundImage=on;
+		backgroundImage = on;
 	}
 
 	/**
@@ -96,8 +95,6 @@ public class Dorm extends PApplet {
 		badger.update();
 	}
 
-
-
 	public void mousePress() {
 		if (keyPressed) {
 			if (fire.isOver(badger)) {
@@ -120,10 +117,8 @@ public class Dorm extends PApplet {
 			}
 
 			else if (key == 'c') {
-				lightOff = true;
 				backgroundImage = off;
 			} else if (key == 'o') {
-				lightOff = false;
 				backgroundImage = on;
 			}
 		}
@@ -137,7 +132,6 @@ public class Dorm extends PApplet {
 			surface.setVisible(false);
 		}
 	}
-	
 
 //	protected Badger getbadger() {
 //		return badger;

@@ -14,7 +14,8 @@ public class Furniture {
 	// private int rotations;
 	public String type;
 
-	// initializes the fields of a new bed object positioned in the center of the
+	// initializes the fields of a new bed object positioned in the center of
+	// the
 	// display
 	public Furniture(String type, int height, int width) {
 		this.type = type;
@@ -57,11 +58,16 @@ public class Furniture {
 		int x = badger.getPosX();
 		int y = badger.getPosY();
 
-		boolean leftof = ((x + (0.5 * width)) < (position[0] - (0.5 * this.width)));
-		boolean rightof = ((x - (0.5 * width)) > (position[0] + (0.5 * this.width)));
-		boolean above = ((y - (0.5 * height)) > (position[1] + (0.5 * this.height)));
-		boolean below = ((y + (0.5 * height)) < (position[1] - (0.5 * this.height)));
-		return !(leftof == true || rightof == true || above == true || below == true);
+		boolean leftof = ((x + (0.5 * width)) < (position[0]
+				- (0.5 * this.width)));
+		boolean rightof = ((x - (0.5 * width)) > (position[0]
+				+ (0.5 * this.width)));
+		boolean above = ((y - (0.5 * height)) > (position[1]
+				+ (0.5 * this.height)));
+		boolean below = ((y + (0.5 * height)) < (position[1]
+				- (0.5 * this.height)));
+		return !(leftof == true || rightof == true || above == true
+				|| below == true);
 	}
 
 	/**
@@ -69,7 +75,8 @@ public class Furniture {
 	 * 
 	 * @param processing the reference to the processing of the escape room
 	 */
-	public static void setProcessing(PApplet processing) { // initializes processing field
+	public static void setProcessing(PApplet processing) { // initializes
+															// processing field
 		Furniture.processing = processing;
 	}
 
@@ -78,7 +85,8 @@ public class Furniture {
 	 * 
 	 * @return the reference to the processing of the escape room
 	 */
-	protected static PApplet getProcessing() { // accessor method to retrieve this static field
+	protected static PApplet getProcessing() { // accessor method to retrieve
+												// this static field
 		return Furniture.processing;
 	}
 

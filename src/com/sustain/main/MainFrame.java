@@ -2,14 +2,19 @@ package com.sustain.main;
 
 import java.awt.CardLayout;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.Enumeration;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.UIManager;
+import javax.swing.plaf.FontUIResource;
 
 import com.sustain.panel.MapPanel;
 import com.sustain.scene.Dorm;
@@ -26,14 +31,18 @@ public class MainFrame extends JFrame {
 	private CardLayout layout;
 	private JPanel cards;
 	private MapPanel mapPanel;
-	private int time = 5;
+	int time;
 
 	public MainFrame() {
 		super();
+		changeToSystemUI();
+		initGlobalFont(new FontUIResource("Comic Sans MS", Font.PLAIN, 14));
 		// create card layout
 		layout = new CardLayout();
 		cards = new JPanel(layout);
+		time = 0;
 
+		// initialize classes that use PApplet
 		Dorm.init(this);
 
 		// add cards
@@ -54,14 +63,20 @@ public class MainFrame extends JFrame {
 		setTitle("Which garbage are you???"); // TODO: change
 		setVisible(true);
 
+		JOptionPane.showMessageDialog(this, "Welcome to UW Madison campus!\n"
+				+ "You can go to four places everyday!\n"
+				+ "See what you can do to live a more sustainable life!\n"
+				+ "Hover your mouse over each pin for more infomation!",
+				"Welcome", JOptionPane.INFORMATION_MESSAGE);
+
 		setFocusable(true);
 		addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
 				switch (e.getKeyCode()) {
-				case KeyEvent.VK_Q:
-					enter("Map");
-					break;
+					case KeyEvent.VK_Q:
+						enter("Map");
+						break;
 				}
 			}
 		});
@@ -69,24 +84,29 @@ public class MainFrame extends JFrame {
 
 	public void enter(String name) {
 //		layout.show(cards, name);
-		time--;
-		if (time == 0) {
+		time++;
+		mapPanel.updateTime(time);
+		if (time >= 4) {
 			mapPanel.setEnabled(false);
+			return;
 		}
 		switch (name) {
-		case "Dorm":
-			PApplet.main("com.sustain.scene.Dorm");
-			setVisible(false);
-			break;
+			case "Dorm":
+				PApplet.main("com.sustain.scene.Dorm");
+				setVisible(false);
+				break;
 
-		default:
-			break;
+			default:
+				break;
 		}
 	}
-	
+
 	public void reset(ActionEvent e) {
-		time = 5;
+		JOptionPane.showMessageDialog(this,
+				"Congradulations! You have completed you day!");
+		time = 0;
 		mapPanel.setEnabled(true);
+		mapPanel.updateTime(0);
 	}
 
 	private void centerAlign() {
@@ -95,6 +115,25 @@ public class MainFrame extends JFrame {
 		int x = (int) (screenSize.getWidth() - windowSize.getWidth()) / 2;
 		int y = (int) (screenSize.getHeight() - windowSize.getHeight()) / 2;
 		setLocation(x, y);
+	}
+
+	private void changeToSystemUI() {
+		try {
+			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	private void initGlobalFont(FontUIResource font) {
+		for (Enumeration<Object> keys = UIManager.getDefaults().keys(); keys
+				.hasMoreElements();) {
+			Object key = keys.nextElement();
+			Object value = UIManager.get(key);
+			if (value instanceof FontUIResource) {
+				UIManager.put(key, font);
+			}
+		}
 	}
 
 	public static void main(String[] args) {
