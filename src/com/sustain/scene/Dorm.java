@@ -136,6 +136,7 @@ public class Dorm extends PApplet {
 			save = !furnitures.contains(fire) || !furnitures.contains(tv)
 					|| backgroundImage == off;
 			surface.setVisible(false);
+			backgroundImage = on;
 			stop();
 		}
 	}
