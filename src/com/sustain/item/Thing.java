@@ -7,7 +7,6 @@ import processing.core.PApplet;
  * things in our game.
  * 
  * @author Carrie Chen
- * @author Yiping He
  *
  */
 

@@ -46,15 +46,16 @@ public class DragAndDroppableThing extends DraggableThing {
 									// object, and return action,
 									// otherwise return null
 		// if this thing is over the target and the target is active
-		if (isOver(target) && this.isActive()) {
+		if (isOver(target)) {
 			// deactivate both of them
-			if (i == 0)
+			if (i == 0 && this.isActive()) {
 				this.deactivate();
-			else if (i == 1)
+				return action;
+			} else if (i == 1 && target.isActive()) {
 				target.deactivate();
-			return action;
-		} else {
-			return null;
+				return action;
+			}
 		}
+		return null;
 	}
 }
