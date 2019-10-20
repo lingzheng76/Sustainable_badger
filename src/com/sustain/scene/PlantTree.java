@@ -58,7 +58,7 @@ public class PlantTree extends PApplet {
 		this.image(backgroundImage, 0, 0);
 		// iterate the allThings list to update each item
 		for (int i = 0; i < allThings.size(); i++) {
-			Action actionObj = allThings.get(i).update();
+			Action actionObj = allThings.get(i).update(1);
 			// act allThings if the actionObj is not null
 			if (actionObj != null) {
 				actionObj.act(allThings);
@@ -75,7 +75,7 @@ public class PlantTree extends PApplet {
 	public void keyPressed(KeyEvent event) {
 		if (event.getKey() == 'q') {
 			parent.setVisible(true);
-			surface.setVisible(false);
+			stop();
 		}
 	}
 
@@ -148,7 +148,7 @@ public class PlantTree extends PApplet {
 			int length = Integer.parseInt(parts[5].trim());
 			newThing = new VisibleThing(name, x, y, width, length);
 		} else {
-			newThing = new VisibleThing(name, x, y);
+			newThing = new VisibleThing(name, x, y, 100, 100);
 		}
 		return newThing;
 	}
@@ -197,7 +197,7 @@ public class PlantTree extends PApplet {
 		activate = findThingByName(parts[5].trim());
 		// create new thing
 		DragAndDroppableThing newThing = new DragAndDroppableThing(name, x, y,
-				(VisibleThing) dropTarget, new Action(activate));
+				(VisibleThing) dropTarget, new Action(activate), 60, 60);
 		return newThing;
 	}
 }

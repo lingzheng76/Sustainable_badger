@@ -57,14 +57,14 @@ public class MainFrame extends JFrame {
 		// set the behavior of the window
 		setResizable(false);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		setTitle("Which garbage are you???"); // TODO: change
+		setTitle("Sustainable bagder");
 		setVisible(true);
 
 		JOptionPane.showMessageDialog(this, "Welcome to UW Madison campus!\n"
 				+ "You can go to four places everyday!\n"
 				+ "See what you can do to live a more sustainable life!\n"
 				+ "Hover your mouse over each pin for more infomation\n"
-				+ "and press 'q' to quit the scene", "Welcome",
+				+ "and press 'q' to quit the scene!", "Welcome",
 				INFORMATION_MESSAGE);
 
 		setFocusable(true);
@@ -110,7 +110,7 @@ public class MainFrame extends JFrame {
 			case "Nat":
 				JOptionPane.showMessageDialog(this,
 						"You are going to the Natatorium!\n"
-								+ "Use 'qwer' to change your means of transportation"
+								+ "Use 'qwer' to change your means of transportation\n"
 								+ "and use arrow key to move around!",
 						"", INFORMATION_MESSAGE);
 				PApplet.main("com.sustain.scene.Nat");

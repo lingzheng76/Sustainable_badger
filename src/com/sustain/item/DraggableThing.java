@@ -21,8 +21,8 @@ public class DraggableThing extends VisibleThing {
 	 * @param x    the horizontal position that will be assigned to the object
 	 * @param y    the vertical position that will be assigned to the object
 	 */
-	public DraggableThing(String name, int x, int y) {
-		super(name, x, y, 120, 120); // calls the constructor of VisibleThing
+	public DraggableThing(String name, int x, int y, int width, int height) {
+		super(name, x, y, width, height); // calls the constructor of VisibleThing
 		mouseWasPressed = false; // sets mouseWasPressed to false
 		isDragging = false; // sets isDragging to false
 		oldMouseX = x; // sets oldMouseX to x
@@ -34,8 +34,8 @@ public class DraggableThing extends VisibleThing {
 	 * 
 	 * @see VisibleThing#update()
 	 */
-	public Action update() {
-		Action actionUpdate = super.update(); // calls VisibleThing update()
+	public Action update(int i) {
+		Action actionUpdate = super.update(i); // calls VisibleThing update()
 		if (getProcessing().mousePressed && !mouseWasPressed
 				&& isOver(getProcessing().mouseX, getProcessing().mouseY)) {
 			isDragging = true;
@@ -46,7 +46,7 @@ public class DraggableThing extends VisibleThing {
 		} // moves the item if isDragging is true
 		if (!getProcessing().mousePressed && mouseWasPressed) {
 			isDragging = false;
-			actionUpdate = this.drop();
+			actionUpdate = this.drop(i);
 		} // sets isDragging to false and drops the item if the mouse has been
 			// released
 		mouseWasPressed = getProcessing().mousePressed; // updates the
@@ -62,7 +62,7 @@ public class DraggableThing extends VisibleThing {
 	 * 
 	 * @return
 	 */
-	protected Action drop() {
+	protected Action drop(int i) {
 		return null;
 	} // this method returns null
 		// subclass types will override this drop() method to do more

@@ -86,7 +86,8 @@ public class Nat extends PApplet {
 	public void draw() {
 		image(mapImage, 0, 0); // draw the background
 		keyPressed();
-		transport.update();
+		if (!arrived)
+			transport.update();
 		checkArrive();
 	}
 

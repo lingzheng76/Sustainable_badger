@@ -55,17 +55,17 @@ public class TrashBin extends PApplet {
 		int[] wasted = { rand.nextInt(2) + 1, rand.nextInt(2) + 3 };
 
 		DragAndDroppableThing composed1 = new DragAndDroppableThing(
-				"compost" + composed[0], 150, 350, bin1, null);
+				"compost" + composed[0], 150, 350, bin1, null, 120, 120);
 		DragAndDroppableThing composed2 = new DragAndDroppableThing(
-				"compost" + composed[1], 300, 350, bin1, null);
+				"compost" + composed[1], 300, 350, bin1, null, 120, 120);
 		DragAndDroppableThing recylced1 = new DragAndDroppableThing(
-				"recyclable" + recycled[0], 450, 350, bin3, null);
+				"recyclable" + recycled[0], 450, 350, bin3, null, 120, 120);
 		DragAndDroppableThing recylced2 = new DragAndDroppableThing(
-				"recyclable" + recycled[1], 150, 500, bin3, null);
+				"recyclable" + recycled[1], 150, 500, bin3, null, 120, 120);
 		DragAndDroppableThing trash1 = new DragAndDroppableThing(
-				"food" + wasted[0], 300, 500, bin2, null);
+				"food" + wasted[0], 300, 500, bin2, null, 120, 120);
 		DragAndDroppableThing trash2 = new DragAndDroppableThing(
-				"food" + wasted[1], 450, 500, bin2, null);
+				"food" + wasted[1], 450, 500, bin2, null, 120, 120);
 
 		allThings.add(bin1);
 		allThings.add(bin2);
@@ -92,7 +92,7 @@ public class TrashBin extends PApplet {
 			text("All Done!\nCongrats!!", 200, 350);
 		}
 		for (int i = 0; i < allThings.size(); i++) {
-			allThings.get(i).update();
+			allThings.get(i).update(0);
 			// act allThings if the actionObj is not null
 			// remove the items that are not active
 			text(score, 700, 60);
@@ -108,7 +108,7 @@ public class TrashBin extends PApplet {
 	public void keyPressed(KeyEvent event) {
 		if (event.getKey() == 'q') {
 			parent.setVisible(true);
-			surface.setVisible(false);
+			stop();
 		}
 	}
 }

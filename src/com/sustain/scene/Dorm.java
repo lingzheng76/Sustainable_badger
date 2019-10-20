@@ -121,14 +121,13 @@ public class Dorm extends PApplet {
 				backgroundImage = on;
 			}
 		}
-
 	}
 
 	@Override
 	public void keyPressed(KeyEvent event) {
 		if (event.getKey() == 'q') {
 			parent.setVisible(true);
-			surface.setVisible(false);
+			stop();
 		}
 	}
 

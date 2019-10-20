@@ -81,7 +81,7 @@ public class Thing {
 	 * 
 	 * @return null
 	 */
-	public Action update() {
+	public Action update(int i) {
 		return null;
 	}
 

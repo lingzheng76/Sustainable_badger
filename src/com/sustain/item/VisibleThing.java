@@ -32,13 +32,15 @@ public class VisibleThing extends Thing {
 	 * @param x    the horizontal position that will be assigned to the object
 	 * @param y    the vertical position that will be assigned to the object
 	 */
-	public VisibleThing(String name, int x, int y, int width, int length) {
+	public VisibleThing(String name, int x, int y, int width, int height) {
 		super(name); // call the constructor of Thing
 		this.image = getProcessing()
 				.loadImage("images" + File.separator + name + ".png");
-		image.resize(width, length);
+		image.resize(width, height);
 		this.x = x;
 		this.y = y;
+		this.image.width = width;
+		this.image.height = height;
 	}
 
 	/**
@@ -57,7 +59,7 @@ public class VisibleThing extends Thing {
 	 * @see Thing#update()
 	 */
 	@Override
-	public Action update() {
+	public Action update(int i) {
 		getProcessing().image(this.image, x, y);// draws image at its position
 												// before returning null
 		return null;
